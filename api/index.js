@@ -1,10 +1,10 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-const {getRandomFirstName} = require("./util/firstNames");
-const {getRandomLastName} = require("./util/lastNames");
-const {getRandomCountry} = require("./util/countries");
-const {logger} = require("./util/logger");
+const {getRandomFirstName} = require("../util/firstNames");
+const {getRandomLastName} = require("../util/lastNames");
+const {getRandomCountry} = require("../util/countries");
+const {logger} = require("../util/logger");
 
 app.use(express.static("./public"));
 app.use(logger);

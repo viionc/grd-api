@@ -16,6 +16,8 @@ app.get("/api/v1", (req, res) => {
 });
 
 app.get("/api/v1/q", (req, res) => {
+    res.setHeader("Content-Type", "text/html");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     const {limit, friends, country} = req.query;
     const data = [];
     if (limit >= 5 && limit <= 200) {

@@ -11,6 +11,8 @@ app.use(logger);
 app.get("/", (req, res) => {});
 
 app.get("/api", (req, res) => {
+    res.setHeader("Content-Type", "text/html");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     res.status(200).json(createPersonObject(1));
     return;
 });

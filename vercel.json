@@ -1,4 +1,6 @@
 {
-    "rewrites": [{"source": "/api/(.*)", "destination": "/api/v1"}],
-    "headers": [{"source": "/api/q", "has": "/api/v1/q"}]
+    "rewrites": [
+        {"source": "/api/(.*)", "destination": "/api/v1"},
+        {"source": "/api/q", "has": "/api/v1/q"}
+    ]
 }

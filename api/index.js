@@ -10,12 +10,12 @@ app.use(express.static("./public"));
 app.use(logger);
 app.get("/", (req, res) => {});
 
-app.get("/api/v1", (req, res) => {
+app.get("/api", (req, res) => {
     res.status(200).json(createPersonObject(1));
     return;
 });
 
-app.get("/api/v1/q", (req, res) => {
+app.get("/api/q", (req, res) => {
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     const {limit, friends, country} = req.query;

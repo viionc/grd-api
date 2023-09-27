@@ -11,3 +11,7 @@ body {
 nav {
     background-color: #1e2535 !important;
 }
+
+.dark {
+    background-color: #1a1a1a !important;
+}

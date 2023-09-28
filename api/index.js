@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require("path");
 const app = express();
 const {getRandomFirstName} = require("../util/firstNames");
 const {getRandomLastName} = require("../util/lastNames");
@@ -18,6 +17,7 @@ app.get("/api", (req, res) => {
 app.get("/api/q", (req, res) => {
     const {limit, friends, country} = req.query;
     const data = [];
+    if (!limit && !friends && !country) return res.status(400).send("Invalid queries.");
     if (limit >= 5 && limit <= 200) {
         for (let i = 0; i < limit; i++) {
             data.push(createPersonObject(i, country));

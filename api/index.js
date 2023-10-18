@@ -9,7 +9,7 @@ const {logger} = require("../util/logger");
 const PEOPLE_LIMIT = 200;
 
 app.use(express.static("./public"));
-app.use(cors());
+// app.use(cors());
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 

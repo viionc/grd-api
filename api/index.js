@@ -57,6 +57,7 @@ app.get("/api/:apiKey", (req, res) => {
     if (!apiKey) return res.status(400).send("Provide API Key.");
     const user = users[apiKey];
     if (!user) res.status(400).send("Invalid API Key.");
+    console.log(user);
     res.status(200).send(JSON.stringify(user.data));
 });
 

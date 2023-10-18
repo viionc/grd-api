@@ -2,6 +2,8 @@ const apiKeyField = document.getElementById("api-key");
 const generateAPIKeyButton = document.getElementById("api-key-button");
 const resetAPIKeyButton = document.getElementById("reset-api-key-button");
 let apiKey = localStorage.getItem("api-key");
+const localUrl = "http://localhost:5000/api";
+const vercelUrl = "https://grd-api.vercel.app/api";
 
 window.addEventListener("load", () => {
     if (apiKey) {
@@ -27,7 +29,7 @@ const postData = async () => {
     };
 
     //Math.ceil(Math.random() * 100)
-    let response = await fetch("http://localhost:5000/api/", {
+    let response = await fetch(localUrl, {
         method: "POST",
         body: JSON.stringify(person),
         headers: {"Content-Type": "application/json"},
@@ -38,9 +40,9 @@ const createApiKey = async reset => {
     if (apiKey && !reset) return;
     let response;
     if (reset) {
-        response = await fetch(`http://localhost:5000/api/create/q?reset=${reset}&oldKey=${apiKey}`);
+        response = await fetch(`${vercelUrl}/create/q?reset=${reset}&oldKey=${apiKey}`);
     } else {
-        response = await fetch(`http://localhost:5000/api/create/q?reset=${reset}`);
+        response = await fetch(`${vercelUrl}/create/q?reset=${reset}`);
     }
     if (response.ok) {
         response = await response.json();
@@ -56,7 +58,7 @@ const createApiKey = async reset => {
 };
 
 const fetchWithApiKey = async apikey => {
-    let response = await fetch(`http://localhost:5000/api/${apikey}`);
+    let response = await fetch(`${vercelUrl}/${apikey}`);
     if (response.ok) {
         response = await response.json();
     }
@@ -67,7 +69,7 @@ const putData = async (apikey, id) => {
         age: Math.ceil(Math.random() * 100),
         country: "Poland",
     };
-    let response = await fetch(`http://localhost:5000/api/${apikey}/${id}`, {
+    let response = await fetch(`${vercelUrl}/${apikey}/${id}`, {
         method: "PUT",
         body: JSON.stringify(person),
         headers: {"Content-Type": "application/json"},
@@ -76,7 +78,7 @@ const putData = async (apikey, id) => {
 };
 
 const deleteData = async (apikey, id) => {
-    let response = await fetch(`http://localhost:5000/api/${apikey}/${id}`, {
+    let response = await fetch(`${vercelUrl}/${apikey}/${id}`, {
         method: "DELETE",
         headers: {"Content-Type": "application/json"},
     });
@@ -87,7 +89,7 @@ const deleteData = async (apikey, id) => {
 };
 
 const addData = async apikey => {
-    let response = await fetch(`http://localhost:5000/api/${apikey}/q?add=25`);
+    let response = await fetch(`${vercelUrl}/${apikey}/q?add=25`);
     if (response.ok) {
         response = await response.json();
     }
@@ -96,7 +98,7 @@ const addData = async apikey => {
 
 const addDataWithKey = async (apikey, amount) => {
     if (amount > 200) throw new Error("Limit is 200.");
-    let response = await fetch(`http://localhost:5000/api/${apikey}/q?add=${amount}`);
+    let response = await fetch(`${vercelUrl}/${apikey}/q?add=${amount}`);
     if (response.ok) {
         response = await response.json();
     }

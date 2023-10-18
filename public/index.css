@@ -15,3 +15,7 @@ nav {
 .dark {
     background-color: #1a1a1a !important;
 }
+
+.hidden {
+    display: none !important;
+}

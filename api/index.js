@@ -2,13 +2,22 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const uuid = require("uuid");
+const {rateLimit} = require("express-rate-limit");
 const {createPersonObject, createFriendsArray} = require("../util/dataFunctions");
 
 const {logger} = require("../util/logger");
+const limiter = rateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minute
+    limit: 100, // Limit each IP to 100 requests per `window`
+    standardHeaders: "draft-7",
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+    message: "Too many requests from this IP, please try again later. (100 requests per minute)",
+});
 
 const PEOPLE_LIMIT = 200;
 
 app.use(express.static("./public"));
+app.use("/api/", limiter);
 app.use(cors());
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
